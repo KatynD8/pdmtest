@@ -1,0 +1,80 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  height: calc(60px + env(safe-area-inset-top));
+  padding: calc(env(safe-area-inset-top)) 20px 0;
+
+  background: $color-accent;
+  color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 100;
+  margin: 0;
+
+  @supports (padding: constant(safe-area-inset-top)) {
+    height: calc(60px + constant(safe-area-inset-top));
+    padding: constant(safe-area-inset-top) 20px 0;
+  }
+
+  @include media-only($bp-phone) {
+    flex-direction: column;
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    font-family: "SouvenirI";
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @include media-only($bp-phone) {
+      gap: 0;
+    }
+  }
+
+  a {
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: white;
+      color: $color-accent;
+    }
+
+    &.btn-cta {
+      @extend .btn-primary;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+    }
+  }
+
+  /* Lang selector */
+  label,
+  select {
+    font-size: 0.9rem;
+    color: white;
+  }
+
+  select {
+    color: black;
+  }
+}

@@ -1,0 +1,89 @@
+// _global.scss
+
+html,
+body {
+  font-family: $font-body;
+  color: $color-text;
+  background: $color-accent;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1 {
+  color: white;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "SouvenirBI";
+}
+h4 {
+  font-family: "SouvenirI";
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+section {
+  padding: $section-padding;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  margin: auto;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: white;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+  border-radius: 0;
+  align-self: flex-start;
+  border-radius: 25px;
+
+  &:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  }
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h3 {
+  color: #ffe44d;
+  font-weight: 900;
+}
