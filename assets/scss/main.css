@@ -189,7 +189,6 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  overflow: hidden;
 }
 .hero h4 {
   color: white;
@@ -503,6 +502,9 @@ h3 {
   color: #666;
   font-size: 14px;
   line-height: 1.5;
+}
+#about_how .video_title {
+  padding: 2rem;
 }
 #about_how .videos-highlight {
   display: flex;
