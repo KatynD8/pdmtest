@@ -614,8 +614,13 @@ h3 {
   #about_how .videos-highlight {
     flex-direction: column;
   }
-  #about_how .videos-highlight .video-card video {
+  #about_how .videos-highlight .video-card {
     min-height: 400px;
+  }
+  #about_how .videos-highlight .video-card video,
+  #about_how .videos-highlight .video-card iframe {
+    min-height: 400px;
+    position: relative;
   }
   #about_how .videos-highlight .video-card .video-overlay {
     padding: 1.5rem 2rem;

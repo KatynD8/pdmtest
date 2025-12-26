@@ -140,6 +140,7 @@
       position: relative;
       overflow: hidden;
       border-radius: 8px;
+
       /* Vidéo background (local + YouTube) */
       video,
       iframe {
@@ -256,8 +257,12 @@
       flex-direction: column;
 
       .video-card {
-        video {
+        min-height: 400px; // 👈 Ajoutez cette ligne
+
+        video,
+        iframe {
           min-height: 400px;
+          position: relative; // 👈 Changez absolute en relative sur mobile
         }
 
         .video-overlay {
