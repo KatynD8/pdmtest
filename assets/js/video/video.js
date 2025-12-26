@@ -7,32 +7,46 @@ export function initVideoCards() {
 
   videoCards.forEach((card) => {
     const video = card.querySelector("video");
+    const iframe = card.querySelector("iframe");
     const playBtn = card.querySelector(".btn-play");
 
-    if (!video || !playBtn) return;
+    if ((!video && !iframe) || !playBtn) return;
 
     playBtn.addEventListener("click", () => {
       stopAllVideos(videoCards);
 
       card.classList.add("is-playing");
 
-      video.muted = false;
-      video.controls = true;
-      video.play();
+      // Si c'est une vidéo classique
+      if (video) {
+        video.muted = false;
+        video.controls = true;
+        video.play();
+      }
+
+      // Si c'est une iframe YouTube
+      if (iframe) {
+        const src = iframe.src;
+        // Ajoute autoplay=1 si pas déjà présent
+        if (!src.includes("autoplay=1")) {
+          iframe.src = src + (src.includes("?") ? "&" : "?") + "autoplay=1";
+        }
+      }
     });
 
-    // Quand la vidéo est mise en pause
-    video.addEventListener("pause", () => {
-      card.classList.remove("is-playing");
-      video.controls = false;
-    });
+    // Gestion des événements vidéo classique
+    if (video) {
+      video.addEventListener("pause", () => {
+        card.classList.remove("is-playing");
+        video.controls = false;
+      });
 
-    // Quand la vidéo se termine
-    video.addEventListener("ended", () => {
-      card.classList.remove("is-playing");
-      video.controls = false;
-      video.currentTime = 0;
-    });
+      video.addEventListener("ended", () => {
+        card.classList.remove("is-playing");
+        video.controls = false;
+        video.currentTime = 0;
+      });
+    }
   });
 }
 
@@ -40,12 +54,21 @@ export function initVideoCards() {
 function stopAllVideos(cards) {
   cards.forEach((card) => {
     const video = card.querySelector("video");
+    const iframe = card.querySelector("iframe");
 
-    if (!video) return;
+    // Arrêter vidéo classique
+    if (video) {
+      video.pause();
+      video.muted = true;
+      video.controls = false;
+    }
 
-    video.pause();
-    video.muted = true;
-    video.controls = false;
+    // Arrêter iframe YouTube (en rechargeant sans autoplay)
+    if (iframe) {
+      const src = iframe.src.replace(/[?&]autoplay=1/, "");
+      iframe.src = src;
+    }
+
     card.classList.remove("is-playing");
   });
 }
