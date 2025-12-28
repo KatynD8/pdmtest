@@ -2,10 +2,16 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
 
-  height: calc(60px + env(safe-area-inset-top));
-  padding: calc(env(safe-area-inset-top)) 20px 0;
+  // Hauteur dynamique avec safe-area
+  min-height: 60px;
+  height: auto;
+  padding: 0.8rem 20px;
+
+  // Support iOS avec encoche
+  padding-top: calc(0.8rem + env(safe-area-inset-top, 0));
 
   background: $color-accent;
   color: white;
@@ -14,17 +20,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap; // Empêche le retour à la ligne sur petit zoom
 
   z-index: 100;
   margin: 0;
 
   @supports (padding: constant(safe-area-inset-top)) {
-    height: calc(60px + constant(safe-area-inset-top));
-    padding: constant(safe-area-inset-top) 20px 0;
+    padding-top: calc(0.8rem + constant(safe-area-inset-top));
   }
 
   @include media-only($bp-phone) {
-    flex-direction: column;
+    flex-direction: row; // ⚠️ Gardez row au lieu de column
+    padding: 0.6rem 1rem;
+    padding-top: calc(0.6rem + env(safe-area-inset-top, 0));
+    min-height: 50px;
+    gap: 0.5rem;
   }
 
   /* Logo */
@@ -34,6 +44,12 @@
     font-family: "SouvenirI";
     font-size: 1.2rem;
     font-weight: 600;
+    white-space: nowrap; // Empêche le retour à la ligne
+    flex-shrink: 0; // Empêche la compression
+
+    @include media-only($bp-phone) {
+      font-size: 1rem;
+    }
   }
 
   /* Navigation */
@@ -41,9 +57,10 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-shrink: 0; // Empêche la compression
 
     @include media-only($bp-phone) {
-      gap: 0;
+      gap: 0.5rem;
     }
   }
 
@@ -54,6 +71,13 @@
     padding: 0.4rem 0.8rem;
     border-radius: 4px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; // Empêche le retour à la ligne
+    font-size: 1rem;
+
+    @include media-only($bp-phone) {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.85rem;
+    }
 
     &:hover {
       background-color: white;
@@ -64,6 +88,10 @@
       @extend .btn-primary;
       padding: 0.6rem 1.2rem;
       border-radius: 30px;
+
+      @include media-only($bp-phone) {
+        padding: 0.4rem 0.8rem;
+      }
     }
   }
 
@@ -72,9 +100,22 @@
   select {
     font-size: 0.9rem;
     color: white;
+    white-space: nowrap;
+
+    @include media-only($bp-phone) {
+      font-size: 0.8rem;
+    }
   }
 
   select {
     color: black;
+    padding: 0.3rem;
+    border-radius: 4px;
+    border: none;
+
+    @include media-only($bp-phone) {
+      font-size: 0.75rem;
+      padding: 0.2rem;
+    }
   }
 }
